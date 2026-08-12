@@ -7,11 +7,11 @@ from ultralytics import YOLO
 # =========================
 # 固定配置
 # =========================
-WEIGHTS = "/home/xhm/Desktop/ULTRALYTICS_LANE_ROBOT/runs/lane/train/weights/best.pt"
-OUTPUT = "/home/xhm/Desktop/ULTRALYTICS_LANE_ROBOT/runs/lane/train/weights/best.onnx"
+WEIGHTS = "/home/xhm/Desktop/ULTRALYTICS_LANE_ROBOT/runs/lane/train/weights/last.pt"
+OUTPUT = "/home/xhm/Desktop/ULTRALYTICS_LANE_ROBOT/runs/lane/train/weights/last.onnx"
 
 IMG_SIZE = 640
-OPSET = 11
+OPSET = 18
 DEVICE = "cuda:0"   # 没有 CUDA 会自动切到 CPU
 SIMPLIFY = False    # 需要简化 ONNX 时改成 True
 
