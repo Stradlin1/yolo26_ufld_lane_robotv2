@@ -9,9 +9,9 @@ mode: train # (str) YOLO mode, i.e. train, val, predict, export, track, benchmar
 # Train settings -------------------------------------------------------------------------------------------------------
 model: yolo26s-lane-independent.yaml # (str, optional) path to model file, i.e. yolov8n.pt or yolov8n.yaml
 data: ultralytics/cfg/datasets/lane-robot-4tasks.yaml # (str, optional) path to data file, i.e. coco8.yaml
-epochs: 800 # (int) number of epochs to train for
+epochs: 120 # (int) number of epochs to train for
 time: # (float, optional) max hours to train; overrides epochs if set
-patience: 50 # (int) early stop after N epochs without val improvement
+patience: 25 # (int) early stop after N epochs without val improvement
 batch: 16 # (int | float) batch size as int (e.g. 16), or float 0.0–1.0 for AutoBatch fraction of GPU memory
 imgsz: 640 # (int | list) train/val use int (square); predict/export may use [h,w]
 save: True # (bool) save train checkpoints and predict results
@@ -93,9 +93,9 @@ nms: False # (bool) fuse NMS into exported model when backend supports; if True,
 
 # Hyperparameters ------------------------------------------------------------------------------------------------------
 lr0: 0.0003 # (float) initial learning rate (SGD=1e-2, Adam/AdamW=1e-3)
-lrf: 0.01 # (float) final LR fraction; final LR = lr0 * lrf
+lrf: 0.02 # (float) final LR fraction; final LR = lr0 * lrf
 momentum: 0.937 # (float) SGD momentum or Adam beta1
-weight_decay: 0.01 # (float) weight decay (L2 regularization)
+weight_decay: 0.015 # (float) weight decay (L2 regularization)
 warmup_epochs: 3.0 # (float) warmup epochs (fractions allowed)
 warmup_momentum: 0.8 # (float) initial momentum during warmup
 warmup_bias_lr: 0.0003 # (float) bias learning rate during warmup
@@ -117,13 +117,13 @@ lane_feat_h: 8 # (int) fixed feature height before flatten; original model uses 
 lane_feat_w: 10 # (int) fixed feature width before flatten; original model uses 10 for 256x320 input at stride 32
 lane_ce: 1.0 # (float) row-anchor x-class cross-entropy loss gain
 lane_loc: 2.0 # (float) expected-x SmoothL1 loss gain for visible points
-lane_exist: 1.5 # (float) auxiliary lane-existence BCE loss gain
+lane_exist: 1.0 # (float) auxiliary lane-existence BCE loss gain
 lane_smooth: 0.03 # (float) adjacent-row soft-argmax smoothness loss gain
-lane_label_smoothing: 0.0 # (float) label smoothing for row-anchor classification
+lane_label_smoothing: 0.02 # (float) label smoothing for row-anchor classification
 lane_offset: 3.0 # (float) sub-grid offset SmoothL1 loss gain for LaneRobotV2
 lane_curv: 0.02 # (float) second-order curvature regularization gain
 lane_soft_label: True # (bool) use Gaussian soft labels for visible x classes
-lane_soft_sigma: 1.0 # (float) Gaussian sigma in x-grid units for soft-label CE
+lane_soft_sigma: 1.2 # (float) Gaussian sigma in x-grid units for soft-label CE
 lane_softargmax_topk: 5 # (int) local top-k soft-argmax window for decoding and loc loss
 lane_exist_thr: 0.5 # (float) no-lane probability threshold; lower means stricter existence
 lane_post_smooth: True # (bool) apply polynomial smoothing in visualization/predict decoding
